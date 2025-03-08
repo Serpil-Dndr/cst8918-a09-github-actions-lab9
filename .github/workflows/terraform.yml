@@ -1,12 +1,12 @@
-name: Terraform CI
+name: Terraform
 
 on:
   push:
     branches:
-      - main
+      - main  
   pull_request:
     branches:
-      - main
+      - main  
       - dund0021
 
 jobs:
@@ -15,18 +15,18 @@ jobs:
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v3
+      uses: actions/checkout@v2
 
     - name: Set up Terraform
-      uses: hashicorp/setup-terraform@v2
+      uses: hashicorp/setup-terraform@v1
       with:
-        terraform_version: 1.2.0
-
-    - name: Initialize Terraform
-      run: terraform init
+        terraform_version: '1.0.0'
 
     - name: Terraform Format
       run: terraform fmt -check
+
+    - name: Terraform Init
+      run: terraform init
 
     - name: Terraform Validate
       run: terraform validate

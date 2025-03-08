@@ -14,9 +14,9 @@ provider "azurerm" {
 }
 
 resource "azurerm_resource_group" "rg" {
-  name     = "rg-dund0021"
-  location = "East US"
-
+  name  = "rg-dund0021"
+    location = "East US"
+}
 
 resource "azurerm_storage_account" "storage" {
   name                     = "storagedund0021" # Change to a unique name

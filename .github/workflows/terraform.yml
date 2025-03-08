@@ -7,7 +7,6 @@ on:
       - master
       - dund0021
 
-
 permissions:
   id-token: write
   contents: read
@@ -76,4 +75,4 @@ jobs:
         run: terraform validate
 
       - name: Terraform Format Check
-        run: terraform fmt -check -recursive
+        run: terraform fmt -check -recursive  # İşte burası!

@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     name: terraform fmt check
     outputs:
-      CHECK_STATUS: "${{ env.CHECK_STATUS }}"
+      CHECK_STATUS: "${{ steps.set_output.outputs.CHECK_STATUS }}"
     steps:
       - uses: actions/checkout@v3
         with:
@@ -36,7 +36,7 @@ jobs:
       - name: Validate terraform fmt (added_modified)
         run: |
           set +e
-          echo "CHECK_STATUS=0" >> $GITHUB_ENV
+          echo "CHECK_STATUS=0" >> $GITHUB_STATE
 
           for changed_file in ${{ steps.pr_files.outputs.added_modified }}; do
             echo "Checking terraform fmt on ${changed_file}..."
@@ -47,10 +47,14 @@ jobs:
 
               if [[ $FMT_STATUS -ne 0 ]]; then
                 echo "❌ terraform fmt failed - ${changed_file}" >> $GITHUB_STEP_SUMMARY
-                echo "CHECK_STATUS=1" >> $GITHUB_ENV
+                echo "CHECK_STATUS=1" >> $GITHUB_STATE
               fi
             fi
           done
+
+      - name: Set output
+        id: set_output
+        run: echo "CHECK_STATUS=${{ steps.pr_files.outputs.CHECK_STATUS }}" >> $GITHUB_OUTPUT
 
       - name: Process check
         if: always()
@@ -75,4 +79,4 @@ jobs:
         run: terraform validate
 
       - name: Terraform Format Check
-        run: terraform fmt -check -recursive  # İşte burası!
+        run: terraform fmt -check -recursive

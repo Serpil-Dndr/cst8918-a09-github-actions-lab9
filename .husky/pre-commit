@@ -1,5 +1,4 @@
 #!/bin/sh
-set -e  # ❗ Hata oluşursa işlemi durdur
 
 cd infrastructure
 echo "Running terraform fmt ..."

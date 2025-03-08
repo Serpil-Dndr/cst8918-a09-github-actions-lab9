@@ -26,6 +26,5 @@ resource "azurerm_storage_account" "storage" {
   account_replication_type = "LRS"
 }
 
-# Sample change to trigger GitHub Actions
-# try to fixxed error 
+
 

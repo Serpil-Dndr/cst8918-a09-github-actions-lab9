@@ -13,7 +13,7 @@ provider "azurerm" {
   features {}
 }
 
-resource "azurerm_resource_group" "rg" 
+resource "azurerm_resource_group" "rg" {
   name     = "rg-dund0021"
   location = "East US"
 }

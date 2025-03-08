@@ -1,9 +1,16 @@
+#!/bin/sh
+set -e  # ❗ Hata oluşursa işlemi durdur
+
 cd infrastructure
 echo "Running terraform fmt ..."
 terraform fmt -recursive
+
 echo "Running terraform validate ..."
-terraform validate
+terraform validate  # ❗ Eğer hata olursa script durur
+
 echo "Running tflint ..."
-tflint
+tflint  # ❗ Eğer hata olursa script durur
+
 echo "All Terraform checks passed."
 cd ..
+
